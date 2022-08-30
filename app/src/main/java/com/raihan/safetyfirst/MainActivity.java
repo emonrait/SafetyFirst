@@ -1,10 +1,13 @@
 package com.raihan.safetyfirst;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
 import android.app.Activity;
@@ -35,6 +38,7 @@ import android.widget.Toast;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.navigation.NavigationView;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -46,22 +50,25 @@ import java.util.Locale;
 import kotlin.jvm.internal.Intrinsics;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
+    GlobalVariable globalVariable;
     private FusedLocationProviderClient fusedLocationClient;
-
     private TextView address;
     private Button btnClick;
+    private Toolbar toolbar;
     String currentAddress = "";
     private SensorManager mSensorManager;
     private float mAccel; // acceleration apart from gravity
     private float mAccelCurrent; // current acceleration including gravity
     private float mAccelLast; // last acceleration including gravity
+    NavigationView navigationView;
+    DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
+        globalVariable = ((GlobalVariable) getApplicationContext());
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         address = findViewById(R.id.address);
         btnClick = findViewById(R.id.btnClick);
@@ -70,6 +77,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         mAccel = 0.00f;
         mAccelCurrent = SensorManager.GRAVITY_EARTH;
         mAccelLast = SensorManager.GRAVITY_EARTH;
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open, R.string.close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
         // getCurrentAddress();
 
 
@@ -84,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         requestPermissionCall();
                     } else {
                         call();
+                        sendEmail();
                     }
 
                 }
@@ -111,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                             //addresses.get(0).toString() + ", " +
                             addresses.get(0).getPostalCode();
                     address.setText(currentAddress);
+                    globalVariable.setAddress(currentAddress);
                     //Toast.makeText(getApplicationContext(), "Address:- " + addresses.get(0).getFeatureName() + addresses.get(0).getAdminArea() + addresses.get(0).getLocality(), Toast.LENGTH_LONG).show();
                 }
             }
@@ -345,6 +361,24 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onPause() {
         mSensorManager.unregisterListener(mSensorListener);
         super.onPause();
+    }
+
+
+    private void sendEmail() {
+        String email1 = globalVariable.getEmail();
+        String subject = "Welcome Message to ";
+
+        String message = "Dear " + globalVariable.getHelpTeam() + "," + "\n" + "\n" + "I am in a danger. Please Help me immediately. "
+                + "\n" + "My Name is: " + globalVariable.getName() + ". "
+                + "\n" + "My Phone no is: " + globalVariable.getPhone() + ". "
+                + "\n" + "My Current Location is: " + globalVariable.getAddress() + ". "
+                + "\n" + "\n" + "Thanks & Regards"
+                + "\n" + "Name: " + globalVariable.getName()
+                + "\n" + "Mobile: " + globalVariable.getPhone();
+
+        SendMailMessage sm = new SendMailMessage(this, email1, subject, message);
+        sm.execute();
+
     }
 }
 

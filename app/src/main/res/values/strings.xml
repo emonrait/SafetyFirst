@@ -3,4 +3,7 @@
     <string name="shake_or_click_on_below_button_for_help">Shake or click on below button for Help</string>
     <string name="unsafe">Unsafe</string>
     <string name="test">Hello World!</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="example_gmail_com" />
 </resources>
