@@ -29,6 +29,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
+import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -114,11 +115,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     } else {
                         call();
                         sendEmail();
+                        sendSMS(globalVariable.getPoliceMobile(), globalVariable.getAddress());
                     }
 
                 }
             }
         });
+
+        requestPermissionCall();
 
         getgps();
     }
@@ -297,9 +301,23 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
+    public void sendSMS(String phoneNo, String msg) {
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNo, null, msg, null, null);
+            Toast.makeText(getApplicationContext(), "Message Sent",
+                    Toast.LENGTH_LONG).show();
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(), ex.getMessage().toString(),
+                    Toast.LENGTH_LONG).show();
+            ex.printStackTrace();
+        }
+    }
+
     private void call() {
 
-        String number = "+8801816028491";
+        //String number = "+8801816028491";
+        String number = globalVariable.getHelpTeam();
 
         String uri = "tel:" + number.trim();
 
@@ -313,7 +331,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         boolean var10000;
 
         int result = ContextCompat.checkSelfPermission((Context) this, "android.permission.CALL_PHONE");
-        var10000 = result == 0;
+        int result1 = ContextCompat.checkSelfPermission((Context) this, "android.permission.SEND_SMS");
+        var10000 = result == 0 && result1 == 0;
 
         return var10000;
     }
@@ -321,7 +340,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private void requestPermissionCall() {
 
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{
-                Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CALL_PHONE}, PackageManager.PERMISSION_GRANTED);
+                Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS}, PackageManager.PERMISSION_GRANTED);
 
     }
 
@@ -360,6 +379,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 getgps();
                 call();
                 sendEmail();
+                sendSMS(globalVariable.getPoliceMobile(), globalVariable.getAddress());
             }
         }
 

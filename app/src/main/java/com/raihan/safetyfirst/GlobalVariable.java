@@ -7,10 +7,10 @@ public class GlobalVariable extends Application {
     private String longitude = "";
     private String name = "";
     private String address = "";
-    private String policeMobile = "";
-    private String phone = "";
-    private String email = "";
-    private String helpTeam = "";
+    private String policeMobile = "+8801816028491";
+    private String phone = "+8801816028491";
+    private String email = "emonrait@gmail.com";
+    private String helpTeam = "Bangladesh Police";
 
     public String getLatitude() {
         return latitude;
