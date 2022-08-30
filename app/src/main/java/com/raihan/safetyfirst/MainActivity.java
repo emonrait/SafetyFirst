@@ -139,13 +139,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                             addresses.get(0).getSubThoroughfare() + " " +
                             addresses.get(0).getThoroughfare() + ", " +
                             addresses.get(0).getSubLocality() + ", " +
-                            addresses.get(0).getLocality() + ", " +
+                            addresses.get(0).getLocality() + "-" +
+                            addresses.get(0).getPostalCode() + ", " +
                             addresses.get(0).getAdminArea() + ", " +
                             addresses.get(0).getCountryName() + ", " +
                             //addresses.get(0).toString() + ", " +
-                            addresses.get(0).getPostalCode();
+                            addresses.get(0).getAddressLine(0);
                     address.setText(currentAddress);
                     globalVariable.setAddress(currentAddress);
+                    globalVariable.setLatitude(String.valueOf(addresses.get(0).getLatitude()));
+                    globalVariable.setLongitude(String.valueOf(addresses.get(0).getLongitude()));
                     //Toast.makeText(getApplicationContext(), "Address:- " + addresses.get(0).getFeatureName() + addresses.get(0).getAdminArea() + addresses.get(0).getLocality(), Toast.LENGTH_LONG).show();
                 }
             }
@@ -407,7 +410,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         String message = "Dear " + globalVariable.getHelpTeam() + "," + "\n" + "\n" + "I am in a danger. Please Help me immediately. "
                 + "\n" + "My Name is: " + globalVariable.getName() + ". "
                 + "\n" + "My Phone no is: " + globalVariable.getPhone() + ". "
+                + "\n" + "My Current latitude is: " + globalVariable.getLatitude() + ". "
+                + "\n" + "My longitude is: " + globalVariable.getLongitude() + ". "
                 + "\n" + "My Current Location is: " + globalVariable.getAddress() + ". "
+                + "\n" + "My Current Location map url is: " + globalVariable.getMapurl() + globalVariable.getLatitude() + "," + globalVariable.getLongitude()
                 + "\n" + "\n" + "Thanks & Regards"
                 + "\n" + "Name: " + globalVariable.getName()
                 + "\n" + "Mobile: " + globalVariable.getPhone();
