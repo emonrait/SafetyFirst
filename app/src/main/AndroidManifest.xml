@@ -23,10 +23,12 @@
         android:theme="@style/Theme.SafetyFirst">
         <activity
             android:name=".EmergencyInformation"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".PersonalInformation"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

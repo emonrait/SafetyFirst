@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        getSupportActionBar().setTitle("Safety First");
         // getCurrentAddress();
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
