@@ -6,4 +6,6 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="example_gmail_com" />
+    <string name="add_personal_information">Add Personal Information</string>
+    <string name="add_emergency_information">Add Emergency Information</string>
 </resources>

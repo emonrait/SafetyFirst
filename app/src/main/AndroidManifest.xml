@@ -8,16 +8,24 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
-    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
-
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="true" />
 
     <application
+        android:name=".GlobalVariable"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SafetyFirst">
+        <activity
+            android:name=".EmergencyInformation"
+            android:exported="true" />
+        <activity
+            android:name=".PersonalInformation"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -26,12 +34,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.CALL_PRIVILEGED" />
+
                 <data android:scheme="tel" />
             </intent-filter>
-
         </activity>
     </application>
 

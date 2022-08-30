@@ -1,5 +1,6 @@
 package com.raihan.safetyfirst;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +31,7 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -85,7 +87,20 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         // getCurrentAddress();
-
+        navigationView.setItemIconTintList(null);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.profile) {
+                    Intent a = new Intent(getApplicationContext(), PersonalInformation.class);
+                    startActivity(a);
+                } else if (item.getItemId() == R.id.emProfile) {
+                    Intent a = new Intent(getApplicationContext(), EmergencyInformation.class);
+                    startActivity(a);
+                }
+                return false;
+            }
+        });
 
         btnClick.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -344,6 +359,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             if (mAccel > 10) {
                 getgps();
                 call();
+                sendEmail();
             }
         }
 

@@ -3,17 +3,10 @@
     <item
         android:id="@+id/profile"
         android:icon="@drawable/logo"
-        android:title="@string/app_name" />
+        android:title="@string/add_personal_information" />
     <item
-        android:id="@+id/totalbal"
+        android:id="@+id/emProfile"
         android:icon="@drawable/logo"
-        android:title="@string/app_name" />
-    <item
-        android:id="@+id/state"
-        android:icon="@drawable/logo"
-        android:title="@string/app_name" />
-    <item
-        android:id="@+id/members"
-        android:icon="@drawable/logo"
-        android:title="@string/app_name" />
+        android:title="@string/add_emergency_information" />
+
 </menu>
