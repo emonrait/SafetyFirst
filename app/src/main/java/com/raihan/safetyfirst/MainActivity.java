@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private FusedLocationProviderClient fusedLocationClient;
     private TextView address;
     private Button btnClick;
+    private Button btnSafe;
     private Toolbar toolbar;
     String currentAddress = "";
     private SensorManager mSensorManager;
@@ -75,6 +76,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         address = findViewById(R.id.address);
         btnClick = findViewById(R.id.btnClick);
+        btnSafe = findViewById(R.id.btnSafe);
+
+
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
         mAccel = 0.00f;
@@ -88,6 +92,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         getSupportActionBar().setTitle("Safety First");
+
+
         // getCurrentAddress();
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -103,7 +109,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 return false;
             }
         });
-
+        btnSafe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent a = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(a);
+                btnClick.setVisibility(View.VISIBLE);
+                btnSafe.setVisibility(View.GONE);
+            }
+        });
         btnClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,6 +131,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         call();
                         sendEmail();
                         sendSMS(globalVariable.getPoliceMobile(), globalVariable.getAddress());
+                        btnClick.setVisibility(View.GONE);
+                        btnSafe.setVisibility(View.VISIBLE);
                     }
 
                 }
@@ -380,10 +396,22 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             float delta = mAccelCurrent - mAccelLast;
             mAccel = mAccel * 0.9f + delta; // perform low-cut filter
             if (mAccel > 10) {
-                getgps();
-                call();
-                sendEmail();
-                sendSMS(globalVariable.getPoliceMobile(), globalVariable.getAddress());
+                if (!isLocationEnabled(MainActivity.this)) {
+                    openSettings();
+                } else {
+                    getgps();
+                    if (!checkPermissionCall()) {
+                        requestPermissionCall();
+                    } else {
+                        call();
+                        sendEmail();
+                        sendSMS(globalVariable.getPoliceMobile(), globalVariable.getAddress());
+                        btnClick.setVisibility(View.GONE);
+                        btnSafe.setVisibility(View.VISIBLE);
+                    }
+
+                }
+
             }
         }
 
