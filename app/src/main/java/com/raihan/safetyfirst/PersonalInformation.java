@@ -3,6 +3,7 @@ package com.raihan.safetyfirst;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,8 +11,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.raihan.safetyfirst.database.DatabaseHelper;
+import com.raihan.safetyfirst.util.GlobalVariable;
 
 public class PersonalInformation extends AppCompatActivity {
+    GlobalVariable globalVariable;
     private Toolbar toolbar;
     private EditText name_value;
     private EditText mobile_value;
@@ -28,13 +31,13 @@ public class PersonalInformation extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Personal Information");
-
+        globalVariable = ((GlobalVariable) getApplicationContext());
         myDB = new DatabaseHelper(this);
         name_value = findViewById(R.id.name_value);
         mobile_value = findViewById(R.id.mobile_value);
         email_value = findViewById(R.id.email_value);
         btnSubmit = findViewById(R.id.btnSubmit);
-
+        getData();
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +58,21 @@ public class PersonalInformation extends AppCompatActivity {
         });
 
 
+    }
+
+    private void getData() {
+        // Cursor cursor = myDB.searchData("P");
+        Cursor cursor = myDB.fetch();
+        if (cursor.getCount() > 0) {
+                    //    Toast.makeText(getApplicationContext(), cursor.getString(4), Toast.LENGTH_SHORT).show();
+            if (cursor.getString(4).equals("P")) {
+                globalVariable.setName(cursor.getString(1));
+                globalVariable.setEmail(cursor.getString(2));
+                globalVariable.setPhone(cursor.getString(3));
+                //Toast.makeText(getApplicationContext(), cursor.getString(1), Toast.LENGTH_SHORT).show();
+            }
+
+        }
     }
 
     private void addPersonalInfo() {

@@ -13,6 +13,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -38,6 +39,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.raihan.safetyfirst.database.DatabaseHelper;
 import com.raihan.safetyfirst.util.GlobalVariable;
 import com.raihan.safetyfirst.util.SendMailMessage;
 
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private float mAccelLast; // last acceleration including gravity
     NavigationView navigationView;
     DrawerLayout drawer;
+    DatabaseHelper myDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         btnClick = findViewById(R.id.btnClick);
         btnSafe = findViewById(R.id.btnSafe);
         tv_version = findViewById(R.id.tv_version);
-
+        myDB = new DatabaseHelper(this);
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
@@ -93,6 +96,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         toggle.syncState();
         Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.app_name);
 
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View nevhead = navigationView.getHeaderView(0);
+        final TextView namet = nevhead.findViewById(R.id.name);
+        final TextView emailt = nevhead.findViewById(R.id.email);
+        final TextView mobilet = nevhead.findViewById(R.id.mobile);
+        getData();
+        namet.setText(globalVariable.getName());
+        emailt.setText(globalVariable.getEmail());
+        mobilet.setText(globalVariable.getPhone());
         tv_version.setText("App Version:-" + BuildConfig.VERSION_NAME);
         // getCurrentAddress();
         navigationView.setItemIconTintList(null);
@@ -419,6 +431,21 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         SendMailMessage sm = new SendMailMessage(this, email1, subject, message);
         sm.execute();
 
+    }
+
+    private void getData() {
+        // Cursor cursor = myDB.searchData("P");
+        Cursor cursor = myDB.fetch();
+        if (cursor.getCount() > 0) {
+            //    Toast.makeText(getApplicationContext(), cursor.getString(4), Toast.LENGTH_SHORT).show();
+            if (cursor.getString(4).equals("P")) {
+                globalVariable.setName(cursor.getString(1));
+                globalVariable.setEmail(cursor.getString(2));
+                globalVariable.setPhone(cursor.getString(3));
+                //Toast.makeText(getApplicationContext(), cursor.getString(1), Toast.LENGTH_SHORT).show();
+            }
+
+        }
     }
 }
 

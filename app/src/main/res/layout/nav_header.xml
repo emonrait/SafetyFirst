@@ -19,7 +19,7 @@
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Emon Raihan"
+        android:text=""
         android:textColor="#ffffff"
         android:textSize="18sp" />
 
@@ -27,7 +27,7 @@
         android:id="@+id/mobile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="01516790441"
+        android:text=""
         android:textColor="#ffffff"
         android:textSize="14sp" />
 

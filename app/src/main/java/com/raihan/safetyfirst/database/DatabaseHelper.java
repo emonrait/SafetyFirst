@@ -2,8 +2,12 @@ package com.raihan.safetyfirst.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.TextView;
+
+import com.raihan.safetyfirst.util.Model;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "safety.db";
@@ -12,6 +16,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String EMAILN = "emailn";
     public static final String PHONEN = "phonen";
     public static final String FLAGN = "flagn";
+    public static final String ID = "id";
+    private SQLiteDatabase database;
 
 
     public DatabaseHelper(Context context) {
@@ -52,4 +58,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
     }
+
+    public Cursor fetch() {
+        database = this.getWritableDatabase();
+        Cursor cursor = null;
+        try {
+            cursor = this.database.query(DatabaseHelper.TABLE_NAME, new String[]{DatabaseHelper.ID, DatabaseHelper.NAME, DatabaseHelper.EMAILN, DatabaseHelper.PHONEN, DatabaseHelper.FLAGN}, null, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return cursor;
+    }
+
+    public Cursor searchData(String id) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        //String qry = "SELECT * FROM "+TABLE_NAME+" WHERE ID="+id;
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE ID=" + id, null);
+        return cursor;
+    }
+
 }

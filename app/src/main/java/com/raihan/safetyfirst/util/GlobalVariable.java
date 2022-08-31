@@ -5,12 +5,12 @@ import android.app.Application;
 public class GlobalVariable extends Application {
     private String latitude = "";
     private String longitude = "";
-    private String name = "Raihan Mahamud";
+    private String name = "";
     private String address = "";
-    private String policeMobile = "+8801816028491";
-    private String phone = "+8801816028491";
-    private String email = "emonrait@gmail.com";
-    private String helpTeam = "Bangladesh Police";
+    private String policeMobile = "";
+    private String phone = "";
+    private String email = "";
+    private String helpTeam = "";
     private String mapurl = "https://maps.google.com?q=";
 
     public String getMapurl() {
