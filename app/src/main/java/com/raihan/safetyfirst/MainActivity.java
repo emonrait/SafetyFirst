@@ -395,7 +395,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             mAccelCurrent = (float) Math.sqrt((double) (x * x + y * y + z * z));
             float delta = mAccelCurrent - mAccelLast;
             mAccel = mAccel * 0.9f + delta; // perform low-cut filter
-            if (mAccel > 10) {
+            if (mAccel > 10 && btnSafe.getVisibility() == View.GONE) {
                 if (!isLocationEnabled(MainActivity.this)) {
                     openSettings();
                 } else {
