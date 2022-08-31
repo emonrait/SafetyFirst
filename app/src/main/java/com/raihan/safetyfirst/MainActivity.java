@@ -212,8 +212,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 2296 && Build.VERSION.SDK_INT >= 30 && !Environment.isExternalStorageManager()) {
-            Toast.makeText(this, "Allow permission for storage access!", Toast.LENGTH_LONG).show();
+        if (requestCode == 2296) {
+            Toast.makeText(this, "Allow permission for location access!", Toast.LENGTH_LONG).show();
         }
 
     }
