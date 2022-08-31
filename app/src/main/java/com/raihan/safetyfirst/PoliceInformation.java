@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class PersonalInformation extends AppCompatActivity {
+public class PoliceInformation extends AppCompatActivity {
     private Toolbar toolbar;
     private EditText name_value;
     private EditText mobile_value;
@@ -18,12 +18,12 @@ public class PersonalInformation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personal_information);
+        setContentView(R.layout.activity_police_information);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Personal Information");
+        getSupportActionBar().setTitle("Police Information");
 
         name_value = findViewById(R.id.name_value);
         mobile_value = findViewById(R.id.mobile_value);

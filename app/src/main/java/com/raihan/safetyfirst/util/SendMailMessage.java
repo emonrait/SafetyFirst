@@ -1,10 +1,11 @@
-package com.raihan.safetyfirst;
+package com.raihan.safetyfirst.util;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
+
+import com.raihan.safetyfirst.util.Config;
 
 import java.util.Properties;
 

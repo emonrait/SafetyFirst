@@ -2,11 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/profile"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/peronal"
         android:title="@string/add_personal_information" />
     <item
         android:id="@+id/emProfile"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/emergencycall"
         android:title="@string/add_emergency_information" />
+    <item
+        android:id="@+id/police"
+        android:icon="@drawable/police"
+        android:title="@string/add_police_information" />
 
 </menu>

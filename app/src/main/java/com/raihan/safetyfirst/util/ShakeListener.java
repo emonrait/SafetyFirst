@@ -1,4 +1,4 @@
-package com.raihan.safetyfirst;
+package com.raihan.safetyfirst.util;
 
 import android.content.Context;
 import android.hardware.SensorListener;

@@ -20,10 +20,12 @@
             android:background="@color/colorPrimary"
             app:theme="@style/ToolbarColoredBackArrow"
             app:titleTextColor="@color/white" />
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="15dp"
+            android:layout_marginTop="10dp"
             android:visibility="visible"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="15dp"
@@ -89,7 +91,7 @@
                             android:textColor="@color/black" />
 
                         <EditText
-                            android:id="@+id/product_value"
+                            android:id="@+id/mobile_value"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight=".8"
@@ -118,7 +120,7 @@
                             android:textColor="@color/black" />
 
                         <EditText
-                            android:id="@+id/product_id_value"
+                            android:id="@+id/email_value"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight=".8"
@@ -138,7 +140,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"
-                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/round_corner"
                     android:text="@string/submit"

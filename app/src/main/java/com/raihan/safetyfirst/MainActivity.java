@@ -2,7 +2,6 @@ package com.raihan.safetyfirst;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
@@ -11,15 +10,12 @@ import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.hardware.SensorListener;
 import android.hardware.SensorManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -42,11 +38,12 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.raihan.safetyfirst.util.GlobalVariable;
+import com.raihan.safetyfirst.util.SendMailMessage;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -71,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        //  AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         globalVariable = ((GlobalVariable) getApplicationContext());
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         address = findViewById(R.id.address);
@@ -104,6 +101,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     startActivity(a);
                 } else if (item.getItemId() == R.id.emProfile) {
                     Intent a = new Intent(getApplicationContext(), EmergencyInformation.class);
+                    startActivity(a);
+                } else if (item.getItemId() == R.id.police) {
+                    Intent a = new Intent(getApplicationContext(), PoliceInformation.class);
                     startActivity(a);
                 }
                 return false;
