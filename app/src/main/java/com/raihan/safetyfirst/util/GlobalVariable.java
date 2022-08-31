@@ -7,10 +7,14 @@ public class GlobalVariable extends Application {
     private String longitude = "";
     private String name = "";
     private String address = "";
-    private String policeMobile = "";
     private String phone = "";
     private String email = "";
     private String helpTeam = "";
+    private String policeMobile = "";
+    private String policeEmail = "";
+    private String emName = "";
+    private String emMobile = "";
+    private String emEmail = "";
     private String mapurl = "https://maps.google.com?q=";
 
     public String getMapurl() {
@@ -83,5 +87,37 @@ public class GlobalVariable extends Application {
 
     public void setHelpTeam(String helpTeam) {
         this.helpTeam = helpTeam;
+    }
+
+    public String getPoliceEmail() {
+        return policeEmail;
+    }
+
+    public void setPoliceEmail(String policeEmail) {
+        this.policeEmail = policeEmail;
+    }
+
+    public String getEmName() {
+        return emName;
+    }
+
+    public void setEmName(String emName) {
+        this.emName = emName;
+    }
+
+    public String getEmMobile() {
+        return emMobile;
+    }
+
+    public void setEmMobile(String emMobile) {
+        this.emMobile = emMobile;
+    }
+
+    public String getEmEmail() {
+        return emEmail;
+    }
+
+    public void setEmEmail(String emEmail) {
+        this.emEmail = emEmail;
     }
 }

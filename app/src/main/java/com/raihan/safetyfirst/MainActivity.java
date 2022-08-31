@@ -445,6 +445,20 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 //Toast.makeText(getApplicationContext(), cursor.getString(1), Toast.LENGTH_SHORT).show();
             }
 
+            if (cursor.getString(4).equals("PO")) {
+                globalVariable.setHelpTeam(cursor.getString(1));
+                globalVariable.setPoliceEmail(cursor.getString(2));
+                globalVariable.setPoliceMobile(cursor.getString(3));
+                //Toast.makeText(getApplicationContext(), cursor.getString(1), Toast.LENGTH_SHORT).show();
+            }
+
+            if (cursor.getString(4).equals("E")) {
+                globalVariable.setEmName(cursor.getString(1));
+                globalVariable.setEmEmail(cursor.getString(2));
+                globalVariable.setEmMobile(cursor.getString(3));
+                //Toast.makeText(getApplicationContext(), cursor.getString(1), Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 }
