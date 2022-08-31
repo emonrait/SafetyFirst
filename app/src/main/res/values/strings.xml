@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SafetyFirst</string>
+    <string name="app_name">Safety First</string>
     <string name="shake_or_click_on_below_button_for_help">Shake or click on below button for Help</string>
     <string name="unsafe">Unsafe</string>
     <string name="test">Hello World!</string>

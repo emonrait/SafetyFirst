@@ -46,6 +46,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import kotlin.jvm.internal.Intrinsics;
 
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private TextView address;
     private Button btnClick;
     private Button btnSafe;
+    private TextView tv_version;
     private Toolbar toolbar;
     String currentAddress = "";
     private SensorManager mSensorManager;
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         address = findViewById(R.id.address);
         btnClick = findViewById(R.id.btnClick);
         btnSafe = findViewById(R.id.btnSafe);
+        tv_version = findViewById(R.id.tv_version);
 
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -88,9 +91,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        getSupportActionBar().setTitle("Safety First");
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.app_name);
 
-
+        tv_version.setText("App Version:-" + BuildConfig.VERSION_NAME);
         // getCurrentAddress();
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -174,40 +177,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
-    /*
-        private void checkPermission2() {
-            if (checkPermission()) {
-                // If this check succeeds, proceed with normal processing.
-                // Otherwise, prompt user to get valid Play Services APK.
-                if (!AppUtils.isLocationEnabled(MainActivity.this)) {
-                    // notify user
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-                    dialog.setMessage("Location not enabled!");
-                    dialog.setPositiveButton("Open location settings", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                            Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            startActivity(myIntent);
-                        }
-                    });
-                    dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                            // TODO Auto-generated method stub
-
-                        }
-                    });
-                    dialog.show();
-                }
-                // buildGoogleApiClient();
-            } else {
-                requestPermission();
-            }
-
-        }
-
-    */
     private void openSettings() {
         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         startActivity(intent);
