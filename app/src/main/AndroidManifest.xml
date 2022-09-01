@@ -22,23 +22,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ViewList"
+            android:name=".view.ViewList"
             android:exported="true"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".view.MainActivity" />
         <activity
-            android:name=".PoliceInformation"
+            android:name=".view.PoliceInformation"
             android:exported="true"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".view.MainActivity" />
         <activity
-            android:name=".EmergencyInformation"
+            android:name=".view.EmergencyInformation"
             android:exported="true"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".view.MainActivity" />
         <activity
-            android:name=".PersonalInformation"
+            android:name=".view.PersonalInformation"
             android:exported="true"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".view.MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

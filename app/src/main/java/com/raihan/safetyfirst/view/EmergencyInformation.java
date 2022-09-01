@@ -1,6 +1,4 @@
-package com.raihan.safetyfirst;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.raihan.safetyfirst.view;
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -11,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.raihan.safetyfirst.R;
 import com.raihan.safetyfirst.database.DatabaseHelper;
 import com.raihan.safetyfirst.util.CustomKeyboardHide;
 import com.raihan.safetyfirst.util.GlobalVariable;
