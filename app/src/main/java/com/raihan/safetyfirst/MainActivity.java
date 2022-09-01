@@ -42,6 +42,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.raihan.safetyfirst.database.DatabaseHelper;
 import com.raihan.safetyfirst.util.CustomKeyboardHide;
+import com.raihan.safetyfirst.util.DialogCustom;
 import com.raihan.safetyfirst.util.GlobalVariable;
 import com.raihan.safetyfirst.util.SendMailMessage;
 
@@ -152,7 +153,8 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
                     if (!checkPermissionCall()) {
                         requestPermissionCall();
                     } else {
-                        call();
+                        DialogCustom.showCallDialog(MainActivity.this, globalVariable.getPoliceMobile());
+                        //call();
                         sendEmail();
                         sendSMS(globalVariable.getPoliceMobile(), globalVariable.getAddress());
                         btnClick.setVisibility(View.GONE);
@@ -329,12 +331,9 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
     }
 
     private void call() {
-
         //String number = "+8801816028491";
         String number = globalVariable.getHelpTeam();
-
         String uri = "tel:" + number.trim();
-
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse(uri));
         startActivity(intent);
@@ -389,7 +388,7 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
             mAccelCurrent = (float) Math.sqrt((double) (x * x + y * y + z * z));
             float delta = mAccelCurrent - mAccelLast;
             mAccel = mAccel * 0.9f + delta; // perform low-cut filter
-            if (mAccel > 10 && btnSafe.getVisibility() == View.GONE) {
+            if (mAccel > 15 && btnSafe.getVisibility() == View.GONE) {
                 if (!isLocationEnabled(MainActivity.this)) {
                     openSettings();
                 } else {
@@ -397,7 +396,9 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
                     if (!checkPermissionCall()) {
                         requestPermissionCall();
                     } else {
-                        call();
+
+                        DialogCustom.showCallDialog(MainActivity.this, globalVariable.getPoliceMobile());
+                        //call();
                         sendEmail();
                         sendSMS(globalVariable.getPoliceMobile(), globalVariable.getAddress());
                         btnClick.setVisibility(View.GONE);
@@ -470,6 +471,33 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
                 globalVariable.setEmEmail(cursor.getString(2));
                 globalVariable.setEmMobile(cursor.getString(3));
                 //Toast.makeText(getApplicationContext(), cursor.getString(1), Toast.LENGTH_SHORT).show();
+            }
+
+            while (cursor.moveToNext()) {
+                if (cursor.getString(4).equals("P")) {
+                    globalVariable.setName(cursor.getString(1));
+                    globalVariable.setEmail(cursor.getString(2));
+                    globalVariable.setPhone(cursor.getString(3));
+                    //Toast.makeText(getApplicationContext(), cursor.getString(1), Toast.LENGTH_SHORT).show();
+                }
+
+                if (cursor.getString(4).equals("PO")) {
+                    globalVariable.setHelpTeam(cursor.getString(1));
+                    globalVariable.setPoliceEmail(cursor.getString(2));
+                    globalVariable.setPoliceMobile(cursor.getString(3));
+                    Log.d("police", cursor.getString(1));
+                    Log.d("police", cursor.getString(2));
+                    Log.d("police", cursor.getString(3));
+                    Log.d("police", cursor.getString(4));
+                    //Toast.makeText(getApplicationContext(), cursor.getString(1), Toast.LENGTH_SHORT).show();
+                }
+
+                if (cursor.getString(4).equals("E")) {
+                    globalVariable.setEmName(cursor.getString(1));
+                    globalVariable.setEmEmail(cursor.getString(2));
+                    globalVariable.setEmMobile(cursor.getString(3));
+                    //Toast.makeText(getApplicationContext(), cursor.getString(1), Toast.LENGTH_SHORT).show();
+                }
             }
 
         }
