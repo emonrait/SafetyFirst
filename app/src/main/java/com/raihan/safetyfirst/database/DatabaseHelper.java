@@ -43,15 +43,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean insertData(String name, String email, String phone, String flag) {
         long r = 0;
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("namen", name);
-        values.put("emailn", email);
-        values.put("phonen", phone);
-        values.put("flagn", flag);
-        r = db.insert(TABLE_NAME, null, values);
-        db.close();
-        if (r != 0) {
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("namen", name);
+            values.put("emailn", email);
+            values.put("phonen", phone);
+            values.put("flagn", flag);
+            r = db.insert(TABLE_NAME, null, values);
+            db.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        if (r == 0) {
             return false;
         } else {
             return true;
