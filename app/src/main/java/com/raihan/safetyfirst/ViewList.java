@@ -145,9 +145,6 @@ public class ViewList extends CustomKeyboardHide {
         String flag = update_info_flag_value.getText().toString().trim();
         boolean updateData = myDB.updateData(id, name, email, phone, flag);
         if (updateData == true) {
-            // name_value.setText("");
-            // email_value.setText("");
-            // mobile_value.setText("");
             Toast.makeText(ViewList.this, "Data Update successful.", Toast.LENGTH_SHORT).show();
             spinerList.clear();
             getData();
