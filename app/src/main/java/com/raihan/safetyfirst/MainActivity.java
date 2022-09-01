@@ -120,6 +120,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 } else if (item.getItemId() == R.id.police) {
                     Intent a = new Intent(getApplicationContext(), PoliceInformation.class);
                     startActivity(a);
+                } else if (item.getItemId() == R.id.list) {
+                    Intent a = new Intent(getApplicationContext(), ViewList.class);
+                    startActivity(a);
                 }
                 return false;
             }

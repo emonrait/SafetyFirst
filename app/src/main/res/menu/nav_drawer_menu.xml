@@ -12,5 +12,9 @@
         android:id="@+id/police"
         android:icon="@drawable/police"
         android:title="@string/add_police_information" />
+    <item
+        android:id="@+id/list"
+        android:icon="@drawable/police"
+        android:title="@string/view_list" />
 
 </menu>

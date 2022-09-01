@@ -22,8 +22,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ViewList"
+            android:exported="true"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".PoliceInformation"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".EmergencyInformation"
             android:exported="true"
