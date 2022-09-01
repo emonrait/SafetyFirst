@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.raihan.safetyfirst.R;
 import com.raihan.safetyfirst.database.DatabaseHelper;
 import com.raihan.safetyfirst.util.CustomKeyboardHide;
+import com.raihan.safetyfirst.util.DialogCustom;
 import com.raihan.safetyfirst.util.GlobalVariable;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class ViewList extends CustomKeyboardHide {
     private EditText update_info_type_value;
     private EditText update_info_flag_value;
     private Button btnUpdate;
+    String id = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +61,8 @@ public class ViewList extends CustomKeyboardHide {
         id_value.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                if (!id_value.getSelectedItem().toString().trim().isEmpty()) {
+                id = id_value.getSelectedItem().toString().trim();
+                if (!id.isEmpty()) {
                     update_name_value.setText("");
                     update_email_address_value.setText("");
                     update_mobile_value.setText("");
@@ -78,7 +80,25 @@ public class ViewList extends CustomKeyboardHide {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updatePersonalInfo();
+                if (id.isEmpty()) {
+                    DialogCustom.showErrorMessage(ViewList.this, "NO Data Found. Please Add data first.", "");
+                } else if (update_name_value.getText().toString().isEmpty()) {
+                    update_name_value.requestFocus();
+                    update_name_value.setError("Name is Required!");
+                } else if (update_mobile_value.getText().toString().isEmpty()) {
+                    update_mobile_value.requestFocus();
+                    update_mobile_value.setError("Mobile No Required!");
+                } else if (update_email_address_value.getText().toString().isEmpty()) {
+                    update_email_address_value.requestFocus();
+                    update_email_address_value.setError("Email Address Required!");
+                } else if (update_info_flag_value.getText().toString().isEmpty()) {
+                    update_info_flag_value.requestFocus();
+                    update_info_flag_value.setError("Information Flag is Required!");
+                } else {
+                    updatePersonalInfo();
+                }
+
+
             }
         });
 

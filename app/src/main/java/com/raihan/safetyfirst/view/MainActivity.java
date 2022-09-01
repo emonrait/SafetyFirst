@@ -151,12 +151,24 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
                     if (!checkPermissionCall()) {
                         requestPermissionCall();
                     } else {
-                        DialogCustom.showCallDialog(MainActivity.this, globalVariable.getPoliceMobile());
-                        //call();
-                        sendEmail();
-                        sendSMS(globalVariable.getPoliceMobile(), globalVariable.getAddress());
-                        btnClick.setVisibility(View.GONE);
-                        btnSafe.setVisibility(View.VISIBLE);
+                        if (globalVariable.getName().equals("") || globalVariable.getPhone().equals("") || globalVariable.getEmailList() == null) {
+                            DialogCustom.showErrorMessage(MainActivity.this, "Please Update Personal Contact information", "P");
+
+                        } else if (globalVariable.getHelpTeam().equals("") || globalVariable.getPoliceMobile().equals("") || globalVariable.getEmailList() == null) {
+                            DialogCustom.showErrorMessage(MainActivity.this, "Please Update Police Contact information", "PO");
+
+                        } else if (globalVariable.getEmName().equals("") || globalVariable.getEmMobile().equals("") || globalVariable.getEmailList() == null) {
+                            DialogCustom.showErrorMessage(MainActivity.this, "Please Update Emergency Contact information", "E");
+
+                        } else {
+                            DialogCustom.showCallDialog(MainActivity.this, globalVariable.getPoliceMobile());
+                            //call();
+                            sendEmail();
+                            sendSMS(globalVariable.getEmMobile(), globalVariable.getAddress());
+                            btnClick.setVisibility(View.GONE);
+                            btnSafe.setVisibility(View.VISIBLE);
+                        }
+
                     }
 
                 }
@@ -317,8 +329,12 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
 
     public void sendSMS(String phoneNo, String msg) {
         try {
+            String message = "Dear " + globalVariable.getEmName() + "," + "\n" + "\n" + "I am in a danger. please help. Come and rescue me asap. "
+                    + "\n" + "My Name is: " + globalVariable.getName() + ". "
+                    + "\n" + "My Phone no is: " + globalVariable.getPhone() + ". "
+                    + "\n" + "My Current Location map url is: " + globalVariable.getMapurl() + globalVariable.getLatitude() + "," + globalVariable.getLongitude();
             SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNo, null, msg, null, null);
+            smsManager.sendTextMessage(phoneNo, null, message, null, null);
             Toast.makeText(getApplicationContext(), "Message Sent",
                     Toast.LENGTH_LONG).show();
         } catch (Exception ex) {
@@ -394,13 +410,23 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
                     if (!checkPermissionCall()) {
                         requestPermissionCall();
                     } else {
+                        if (globalVariable.getName().equals("") || globalVariable.getPhone().equals("") || globalVariable.getEmailList() == null) {
+                            DialogCustom.showErrorMessage(MainActivity.this, "Please Update Personal Contact information", "P");
 
-                        DialogCustom.showCallDialog(MainActivity.this, globalVariable.getPoliceMobile());
-                        //call();
-                        sendEmail();
-                        sendSMS(globalVariable.getPoliceMobile(), globalVariable.getAddress());
-                        btnClick.setVisibility(View.GONE);
-                        btnSafe.setVisibility(View.VISIBLE);
+                        } else if (globalVariable.getHelpTeam().equals("") || globalVariable.getPoliceMobile().equals("") || globalVariable.getEmailList() == null) {
+                            DialogCustom.showErrorMessage(MainActivity.this, "Please Update Police Contact information", "PO");
+
+                        } else if (globalVariable.getEmName().equals("") || globalVariable.getEmMobile().equals("") || globalVariable.getEmailList() == null) {
+                            DialogCustom.showErrorMessage(MainActivity.this, "Please Update Emergency Contact information", "E");
+
+                        } else {
+                            DialogCustom.showCallDialog(MainActivity.this, globalVariable.getPoliceMobile());
+                            //call();
+                            sendEmail();
+                            sendSMS(globalVariable.getEmMobile(), globalVariable.getAddress());
+                            btnClick.setVisibility(View.GONE);
+                            btnSafe.setVisibility(View.VISIBLE);
+                        }
                     }
 
                 }
@@ -491,9 +517,9 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
                 }
 
                 if (cursor.getString(4).equals("E")) {
-                    // globalVariable.setEmName(cursor.getString(1));
-                    //  globalVariable.setEmEmail(cursor.getString(2));
-                    //  globalVariable.setEmMobile(cursor.getString(3));
+                    globalVariable.setEmName(cursor.getString(1));
+                    globalVariable.setEmEmail(cursor.getString(2));
+                    globalVariable.setEmMobile(cursor.getString(3));
                     //Toast.makeText(getApplicationContext(), cursor.getString(1), Toast.LENGTH_SHORT).show();
                 }
             }

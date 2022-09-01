@@ -30,7 +30,7 @@ public class DialogCustom {
         dialog.setView(reg_layout);
         final AlertDialog alertDialog = dialog.create();
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
+        tv_message.setText(R.string.alert_message + "-" + phone);
         btn_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,6 +42,51 @@ public class DialogCustom {
             @Override
             public void onClick(View v) {
                 call(activity, phone);
+                alertDialog.cancel();
+
+            }
+        });
+
+
+        alertDialog.show();
+
+    }
+
+    public static void showErrorMessage(Activity activity, String message, String flag) {
+
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(activity).setCancelable(false);
+        LayoutInflater inflater = LayoutInflater.from(activity);
+        View reg_layout = inflater.inflate(R.layout.call_dialog, null);
+
+        final Button btn_no = reg_layout.findViewById(R.id.btn_no);
+        final Button btn_yes = reg_layout.findViewById(R.id.btn_yes);
+        final TextView tv_message = reg_layout.findViewById(R.id.tv_message);
+        final ImageView image_icon = reg_layout.findViewById(R.id.image_icon);
+
+        dialog.setView(reg_layout);
+        final AlertDialog alertDialog = dialog.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        tv_message.setText(message);
+        btn_no.setVisibility(View.GONE);
+        if (flag.equals("P")) {
+            image_icon.setImageResource(R.drawable.peronal);
+        } else if (flag.equals("PO")) {
+            image_icon.setImageResource(R.drawable.police);
+        } else if (flag.equals("E")) {
+            image_icon.setImageResource(R.drawable.emergencycall);
+        } else {
+            image_icon.setImageResource(R.drawable.police);
+        }
+        btn_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.cancel();
+
+            }
+        });
+        btn_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 alertDialog.cancel();
 
             }

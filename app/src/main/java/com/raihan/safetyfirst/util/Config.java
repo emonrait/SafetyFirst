@@ -1,6 +1,6 @@
 package com.raihan.safetyfirst.util;
 
 public class Config {
-    public static final String EMAIL ="stellasanitary22@gmail.com";
-    public static final String PASSWORD ="tslekmfvqvsbaxyj";
+    public static final String EMAIL = "firstsafety503@gmail.com";
+    public static final String PASSWORD = "qefjxdbxuyqsrtkc";
 }
