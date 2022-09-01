@@ -475,7 +475,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     private void getEmailList() {
-        // Cursor cursor = myDB.searchData("P");
         Cursor cursor = myDB.fetch();
         if (cursor.getCount() > 0) {
             // Log.d("cursor-->", cursor.getString(0));
