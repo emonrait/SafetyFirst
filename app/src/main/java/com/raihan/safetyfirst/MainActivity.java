@@ -467,9 +467,9 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
             }
 
             if (cursor.getString(4).equals("E")) {
-                globalVariable.setEmName(cursor.getString(1));
-                globalVariable.setEmEmail(cursor.getString(2));
-                globalVariable.setEmMobile(cursor.getString(3));
+                //  globalVariable.setEmName(cursor.getString(1));
+                //  globalVariable.setEmEmail(cursor.getString(2));
+                //  globalVariable.setEmMobile(cursor.getString(3));
                 //Toast.makeText(getApplicationContext(), cursor.getString(1), Toast.LENGTH_SHORT).show();
             }
 
@@ -493,9 +493,9 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
                 }
 
                 if (cursor.getString(4).equals("E")) {
-                    globalVariable.setEmName(cursor.getString(1));
-                    globalVariable.setEmEmail(cursor.getString(2));
-                    globalVariable.setEmMobile(cursor.getString(3));
+                    // globalVariable.setEmName(cursor.getString(1));
+                    //  globalVariable.setEmEmail(cursor.getString(2));
+                    //  globalVariable.setEmMobile(cursor.getString(3));
                     //Toast.makeText(getApplicationContext(), cursor.getString(1), Toast.LENGTH_SHORT).show();
                 }
             }
