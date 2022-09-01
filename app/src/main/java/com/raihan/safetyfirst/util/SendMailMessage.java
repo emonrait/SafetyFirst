@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.raihan.safetyfirst.util.Config;
 
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -27,6 +28,7 @@ public class SendMailMessage extends AsyncTask<Void, Void, Void> {
     private String email;
     private String subject;
     private String message;
+    private ArrayList<String> emailList;
 
 
     //Progressdialog to show while sending email
@@ -34,13 +36,13 @@ public class SendMailMessage extends AsyncTask<Void, Void, Void> {
     //LoadingDialog loadingDialog = new LoadingDialog(activity);
 
     //Class Constructor
-    public SendMailMessage(Context context, String email, String subject, String message) {
+    public SendMailMessage(Context context, String email, String subject, String message, ArrayList<String> emailList) {
         //Initializing variables
         this.context = context;
         this.email = email;
         this.subject = subject;
         this.message = message;
-
+        this.emailList = emailList;
     }
 
     @Override
@@ -88,10 +90,14 @@ public class SendMailMessage extends AsyncTask<Void, Void, Void> {
             //Setting sender address
             //mm.setFrom(new InternetAddress("xzy@outlook.com", "Naveed Qureshi"));
 
-            mm.setFrom(new InternetAddress(Config.EMAIL, "Stella"));
+            mm.setFrom(new InternetAddress(Config.EMAIL, "Safety First"));
             //Adding receiver
-            mm.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+            // mm.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
             //mm.addRecipient(Message.RecipientType.CC, new InternetAddress("muzahidzoom@gmail.com"));
+            for (String email : emailList) {
+                mm.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+                //mm.addRecipient(Message.RecipientType.BCC, new InternetAddress(email));
+            }
             //Adding subject
             mm.setSubject(subject);
             //Adding message

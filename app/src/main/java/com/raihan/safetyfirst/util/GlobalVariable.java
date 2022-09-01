@@ -2,6 +2,8 @@ package com.raihan.safetyfirst.util;
 
 import android.app.Application;
 
+import java.util.ArrayList;
+
 public class GlobalVariable extends Application {
     private String latitude = "";
     private String longitude = "";
@@ -16,6 +18,7 @@ public class GlobalVariable extends Application {
     private String emMobile = "";
     private String emEmail = "";
     private String mapurl = "https://maps.google.com?q=";
+    private ArrayList<String> emailList;
 
     public String getMapurl() {
         return mapurl;
@@ -119,5 +122,13 @@ public class GlobalVariable extends Application {
 
     public void setEmEmail(String emEmail) {
         this.emEmail = emEmail;
+    }
+
+    public ArrayList<String> getEmailList() {
+        return emailList;
+    }
+
+    public void setEmailList(ArrayList<String> emailList) {
+        this.emailList = emailList;
     }
 }

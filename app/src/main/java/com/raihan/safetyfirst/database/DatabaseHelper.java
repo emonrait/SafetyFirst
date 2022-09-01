@@ -82,9 +82,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Cursor searchData(String id) {
+        Cursor cursor = null;
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         //String qry = "SELECT * FROM "+TABLE_NAME+" WHERE ID="+id;
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE ID=" + id, null);
+        try {
+            cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE ID=" + id, null);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return cursor;
     }
 

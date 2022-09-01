@@ -31,6 +31,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +47,7 @@ import com.raihan.safetyfirst.util.SendMailMessage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -60,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Button btnSafe;
     private TextView tv_version;
     private Toolbar toolbar;
-    String currentAddress = "";
     private SensorManager mSensorManager;
     private float mAccel; // acceleration apart from gravity
     private float mAccelCurrent; // current acceleration including gravity
@@ -68,6 +69,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     NavigationView navigationView;
     DrawerLayout drawer;
     DatabaseHelper myDB;
+
+    String currentAddress = "";
+    ArrayList<String> emailList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,10 +107,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         final TextView emailt = nevhead.findViewById(R.id.email);
         final TextView mobilet = nevhead.findViewById(R.id.mobile);
         getData();
-        namet.setText(globalVariable.getName());
-        emailt.setText(globalVariable.getEmail());
-        mobilet.setText(globalVariable.getPhone());
-        tv_version.setText("App Version:-" + BuildConfig.VERSION_NAME);
+        getEmailList();
+
         // getCurrentAddress();
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -127,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 return false;
             }
         });
+
         btnSafe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 btnSafe.setVisibility(View.GONE);
             }
         });
+
         btnClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,8 +162,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
-        requestPermissionCall();
+        namet.setText(globalVariable.getName());
+        emailt.setText(globalVariable.getEmail());
+        mobilet.setText(globalVariable.getPhone());
+        tv_version.setText("App Version:-" + BuildConfig.VERSION_NAME);
 
+        requestPermissionCall();
         getgps();
     }
 
@@ -332,13 +341,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
     private boolean checkPermissionCall() {
-        boolean var10000;
+        boolean permission;
 
         int result = ContextCompat.checkSelfPermission((Context) this, "android.permission.CALL_PHONE");
         int result1 = ContextCompat.checkSelfPermission((Context) this, "android.permission.SEND_SMS");
-        var10000 = result == 0 && result1 == 0;
+        permission = result == 0 && result1 == 0;
 
-        return var10000;
+        return permission;
     }
 
     private void requestPermissionCall() {
@@ -418,7 +427,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private void sendEmail() {
         String email1 = globalVariable.getEmail();
-        String subject = "Welcome Message to ";
+        String subject = "Help Message";
 
         String message = "Dear " + globalVariable.getHelpTeam() + "," + "\n" + "\n" + "I am in a danger. Please Help me immediately. "
                 + "\n" + "My Name is: " + globalVariable.getName() + ". "
@@ -431,7 +440,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 + "\n" + "Name: " + globalVariable.getName()
                 + "\n" + "Mobile: " + globalVariable.getPhone();
 
-        SendMailMessage sm = new SendMailMessage(this, email1, subject, message);
+        SendMailMessage sm = new SendMailMessage(this, email1, subject, message, globalVariable.getEmailList());
         sm.execute();
 
     }
@@ -462,6 +471,20 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 //Toast.makeText(getApplicationContext(), cursor.getString(1), Toast.LENGTH_SHORT).show();
             }
 
+        }
+    }
+
+    private void getEmailList() {
+        // Cursor cursor = myDB.searchData("P");
+        Cursor cursor = myDB.fetch();
+        if (cursor.getCount() > 0) {
+            // Log.d("cursor-->", cursor.getString(0));
+            emailList.add(cursor.getString(2));
+            while (cursor.moveToNext()) {
+                emailList.add(cursor.getString(2));
+                Log.d("cursor-->", cursor.getString(2));
+            }
+            globalVariable.setEmailList(emailList);
         }
     }
 }
