@@ -10,8 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.raihan.safetyfirst.database.DatabaseHelper;
 import com.raihan.safetyfirst.util.GlobalVariable;
@@ -30,6 +32,7 @@ public class ViewList extends AppCompatActivity {
     private EditText update_mobile_value;
     private EditText update_email_address_value;
     private EditText update_info_type_value;
+    private Button btnUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class ViewList extends AppCompatActivity {
         update_mobile_value = findViewById(R.id.update_mobile_value);
         update_email_address_value = findViewById(R.id.update_email_address_value);
         update_info_type_value = findViewById(R.id.update_info_type_value);
+        btnUpdate = findViewById(R.id.btnUpdate);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -66,6 +70,13 @@ public class ViewList extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updatePersonalInfo();
             }
         });
 
@@ -119,6 +130,23 @@ public class ViewList extends AppCompatActivity {
             } catch (Exception e) {
                 Log.d("valuetest-->", String.valueOf(e.getMessage()));
             }
+        }
+    }
+
+    private void updatePersonalInfo() {
+        String id = id_value.getSelectedItem().toString().trim();
+        String name = update_name_value.getText().toString().trim();
+        String email = update_email_address_value.getText().toString().trim();
+        String phone = update_mobile_value.getText().toString().trim();
+        String flag = update_info_type_value.getText().toString().trim();
+        boolean updateData = myDB.updateData(id, name, email, phone, flag);
+        if (updateData == true) {
+            // name_value.setText("");
+            // email_value.setText("");
+            // mobile_value.setText("");
+            Toast.makeText(ViewList.this, "Data Update successful.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(ViewList.this, "Data Update unsuccessful.", Toast.LENGTH_SHORT).show();
         }
     }
 

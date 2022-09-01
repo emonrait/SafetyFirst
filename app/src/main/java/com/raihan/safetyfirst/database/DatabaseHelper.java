@@ -66,6 +66,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public boolean updateData(String id, String name, String email, String phone, String flag) {
+        long r = 0;
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("namen", name);
+            values.put("emailn", email);
+            values.put("phonen", phone);
+            values.put("flagn", flag);
+            // r = db.update(TABLE_NAME, null, values);
+            r = db.update(TABLE_NAME, values, "_id = ?", new String[]{id});
+
+            db.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        if (r == 0) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
     public Cursor fetch() {
         database = this.getWritableDatabase();
         Cursor cursor = null;
