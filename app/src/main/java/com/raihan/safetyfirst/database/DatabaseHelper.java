@@ -76,7 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put("phonen", phone);
             values.put("flagn", flag);
             // r = db.update(TABLE_NAME, null, values);
-            r = db.update(TABLE_NAME, values, "_id = ?", new String[]{id});
+            r = db.update(TABLE_NAME, values, " id = ?", new String[]{id});
 
             db.close();
 

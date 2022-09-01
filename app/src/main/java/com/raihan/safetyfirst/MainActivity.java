@@ -41,6 +41,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.raihan.safetyfirst.database.DatabaseHelper;
+import com.raihan.safetyfirst.util.CustomKeyboardHide;
 import com.raihan.safetyfirst.util.GlobalVariable;
 import com.raihan.safetyfirst.util.SendMailMessage;
 
@@ -54,7 +55,7 @@ import java.util.Objects;
 
 import kotlin.jvm.internal.Intrinsics;
 
-public class MainActivity extends AppCompatActivity implements SensorEventListener {
+public class MainActivity extends CustomKeyboardHide implements SensorEventListener {
     GlobalVariable globalVariable;
     private FusedLocationProviderClient fusedLocationClient;
     private TextView address;

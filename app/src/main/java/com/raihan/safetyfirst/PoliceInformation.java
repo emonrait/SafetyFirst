@@ -11,9 +11,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.raihan.safetyfirst.database.DatabaseHelper;
+import com.raihan.safetyfirst.util.CustomKeyboardHide;
 import com.raihan.safetyfirst.util.GlobalVariable;
 
-public class PoliceInformation extends AppCompatActivity {
+public class PoliceInformation extends CustomKeyboardHide {
     GlobalVariable globalVariable;
     private Toolbar toolbar;
     private EditText name_value;

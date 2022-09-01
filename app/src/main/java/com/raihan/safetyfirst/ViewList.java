@@ -16,12 +16,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.raihan.safetyfirst.database.DatabaseHelper;
+import com.raihan.safetyfirst.util.CustomKeyboardHide;
 import com.raihan.safetyfirst.util.GlobalVariable;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ViewList extends AppCompatActivity {
+public class ViewList extends CustomKeyboardHide {
     GlobalVariable globalVariable;
     DatabaseHelper myDB;
     ArrayList<String> spinerList = new ArrayList<>();
@@ -32,6 +33,7 @@ public class ViewList extends AppCompatActivity {
     private EditText update_mobile_value;
     private EditText update_email_address_value;
     private EditText update_info_type_value;
+    private EditText update_info_flag_value;
     private Button btnUpdate;
 
     @Override
@@ -48,6 +50,7 @@ public class ViewList extends AppCompatActivity {
         update_mobile_value = findViewById(R.id.update_mobile_value);
         update_email_address_value = findViewById(R.id.update_email_address_value);
         update_info_type_value = findViewById(R.id.update_info_type_value);
+        update_info_flag_value = findViewById(R.id.update_info_flag_value);
         btnUpdate = findViewById(R.id.btnUpdate);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -125,6 +128,7 @@ public class ViewList extends AppCompatActivity {
                     update_email_address_value.setText(email);
                     update_mobile_value.setText(mobile);
                     update_info_type_value.setText(valueflg);
+                    update_info_flag_value.setText(flag);
                 }
 
             } catch (Exception e) {
@@ -138,13 +142,15 @@ public class ViewList extends AppCompatActivity {
         String name = update_name_value.getText().toString().trim();
         String email = update_email_address_value.getText().toString().trim();
         String phone = update_mobile_value.getText().toString().trim();
-        String flag = update_info_type_value.getText().toString().trim();
+        String flag = update_info_flag_value.getText().toString().trim();
         boolean updateData = myDB.updateData(id, name, email, phone, flag);
         if (updateData == true) {
             // name_value.setText("");
             // email_value.setText("");
             // mobile_value.setText("");
             Toast.makeText(ViewList.this, "Data Update successful.", Toast.LENGTH_SHORT).show();
+            spinerList.clear();
+            getData();
         } else {
             Toast.makeText(ViewList.this, "Data Update unsuccessful.", Toast.LENGTH_SHORT).show();
         }

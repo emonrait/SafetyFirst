@@ -19,4 +19,5 @@
     <string name="view_list">View List</string>
     <string name="info_type">Info Type</string>
     <string name="info_view_list">View List</string>
+    <string name="info_flag">Info Flag</string>
 </resources>
