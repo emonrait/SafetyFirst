@@ -17,6 +17,10 @@ import android.widget.TextView;
 
 import com.raihan.safetyfirst.R;
 
+import java.text.DecimalFormat;
+import java.text.Format;
+import java.util.Locale;
+
 
 public class DialogCustom {
 
@@ -132,7 +136,13 @@ public class DialogCustom {
 
             String regx = "[-+^:*#_/, %@$@!*\u09F3]";
             str = str.replaceAll(regx, "");
-            rValue = Double.parseDouble(str);
+            //rValue = Double.parseDouble(str);
+
+            Format f = DecimalFormat.getNumberInstance(new Locale("en", "IN"));
+            ((DecimalFormat) f).setDecimalSeparatorAlwaysShown(true);
+            ((DecimalFormat) f).setMaximumFractionDigits(2);
+            ((DecimalFormat) f).setMinimumFractionDigits(2);
+            rValue = Double.parseDouble(f.format(rValue));
 
         } catch (Exception e) {
             e.printStackTrace();
