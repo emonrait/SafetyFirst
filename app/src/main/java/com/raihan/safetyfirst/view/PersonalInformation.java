@@ -14,6 +14,8 @@ import com.raihan.safetyfirst.database.DatabaseHelper;
 import com.raihan.safetyfirst.util.CustomKeyboardHide;
 import com.raihan.safetyfirst.util.GlobalVariable;
 
+import java.util.Objects;
+
 public class PersonalInformation extends CustomKeyboardHide {
     GlobalVariable globalVariable;
     private Toolbar toolbar;
@@ -30,7 +32,7 @@ public class PersonalInformation extends CustomKeyboardHide {
         setContentView(R.layout.activity_personal_information);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Personal Information");
         globalVariable = ((GlobalVariable) getApplicationContext());

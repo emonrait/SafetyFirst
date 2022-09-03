@@ -15,6 +15,8 @@ import com.raihan.safetyfirst.database.DatabaseHelper;
 import com.raihan.safetyfirst.util.CustomKeyboardHide;
 import com.raihan.safetyfirst.util.GlobalVariable;
 
+import java.util.Objects;
+
 public class PoliceInformation extends CustomKeyboardHide {
     GlobalVariable globalVariable;
     private Toolbar toolbar;
@@ -31,7 +33,7 @@ public class PoliceInformation extends CustomKeyboardHide {
         setContentView(R.layout.activity_police_information);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Police Information");
         globalVariable = ((GlobalVariable) getApplicationContext());
