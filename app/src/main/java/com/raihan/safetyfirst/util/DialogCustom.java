@@ -105,7 +105,7 @@ public class DialogCustom {
         //String number = "+8801816028491";
         String number = phone;
         String uri = "tel:" + number.trim();
-        Intent intent = new Intent(Intent.ACTION_DIAL);
+        Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse(uri));
         activity.startActivity(intent);
     }
