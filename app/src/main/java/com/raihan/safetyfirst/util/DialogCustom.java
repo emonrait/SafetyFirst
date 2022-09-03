@@ -1,5 +1,8 @@
 package com.raihan.safetyfirst.util;
 
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -97,7 +100,7 @@ public class DialogCustom {
 
     }
 
-    static void call(Activity activity, String phone) {
+    public static void call(Activity activity, String phone) {
 
         //String number = "+8801816028491";
         String number = phone;
@@ -105,5 +108,18 @@ public class DialogCustom {
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse(uri));
         activity.startActivity(intent);
+    }
+
+
+    public static void doClearActivity(Intent intent, Activity activity) {
+
+        intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities
+        activity.startActivity(intent);
+        activity.finish();
+        //activity.finishAffinity();
+
     }
 }

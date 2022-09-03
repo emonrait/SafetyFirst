@@ -2,6 +2,7 @@ package com.raihan.safetyfirst.view;
 
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.raihan.safetyfirst.R;
 import com.raihan.safetyfirst.database.DatabaseHelper;
 import com.raihan.safetyfirst.util.CustomKeyboardHide;
+import com.raihan.safetyfirst.util.DialogCustom;
 import com.raihan.safetyfirst.util.GlobalVariable;
 
 import java.util.Objects;
@@ -107,4 +109,9 @@ public class PoliceInformation extends CustomKeyboardHide {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(PoliceInformation.this, MainActivity.class);
+        DialogCustom.doClearActivity(intent, PoliceInformation.this);
+    }
 }
