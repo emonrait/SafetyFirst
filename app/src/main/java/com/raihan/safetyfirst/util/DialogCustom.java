@@ -30,7 +30,7 @@ public class DialogCustom {
         dialog.setView(reg_layout);
         final AlertDialog alertDialog = dialog.create();
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        tv_message.setText(R.string.alert_message + "-" + phone);
+        tv_message.setText(activity.getString(R.string.alert_message) + "-" + phone);
         btn_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +102,7 @@ public class DialogCustom {
         //String number = "+8801816028491";
         String number = phone;
         String uri = "tel:" + number.trim();
-        Intent intent = new Intent(Intent.ACTION_CALL);
+        Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse(uri));
         activity.startActivity(intent);
     }
