@@ -333,7 +333,7 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
         } else {
             try {
                 String message = "Dear " + globalVariable.getEmName() + "," + "\n" + "\n" + "I am in a danger. please help. Come and rescue me asap. "
-                        //  + "\n" + "My Name is: " + globalVariable.getName() + ". "
+                        + "\n" + "My Name is: " + globalVariable.getName() + ". "
                         //  + "\n" + "My Phone no is: " + globalVariable.getPhone() + ". "
                         + "\n" + "My Current Location is: " + globalVariable.getMapurl() + DialogCustom.replacecommaDouble(globalVariable.getLatitude()) + "," + DialogCustom.replacecommaDouble(globalVariable.getLongitude());
                 SmsManager smsManager = SmsManager.getDefault();
