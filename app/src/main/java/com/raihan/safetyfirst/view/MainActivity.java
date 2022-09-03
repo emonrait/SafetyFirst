@@ -539,5 +539,10 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
             globalVariable.setEmailList(emailList);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        this.finishAffinity();
+    }
 }
 

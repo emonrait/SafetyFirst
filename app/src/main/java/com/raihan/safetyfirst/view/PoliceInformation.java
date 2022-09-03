@@ -4,6 +4,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ public class PoliceInformation extends CustomKeyboardHide {
     private EditText email_value;
     private Button btnSubmit;
     DatabaseHelper myDB;
+    String oldValue = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,8 @@ public class PoliceInformation extends CustomKeyboardHide {
         mobile_value = findViewById(R.id.mobile_value);
         email_value = findViewById(R.id.email_value);
         btnSubmit = findViewById(R.id.btnSubmit);
+
+        getData();
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,28 +69,40 @@ public class PoliceInformation extends CustomKeyboardHide {
         String email = email_value.getText().toString().trim();
         String phone = mobile_value.getText().toString().trim();
         String flag = "PO";
-        boolean insertData = myDB.insertData(name, email, phone, flag);
-        if (insertData == true) {
-            name_value.setText("");
-            email_value.setText("");
-            mobile_value.setText("");
-            Toast.makeText(PoliceInformation.this, "Data Insert successful.", Toast.LENGTH_SHORT).show();
+        if (oldValue.equals(flag)) {
+            Toast.makeText(PoliceInformation.this, "Information already updated.", Toast.LENGTH_SHORT).show();
+
         } else {
-            Toast.makeText(PoliceInformation.this, "Data Insert unsuccessful.", Toast.LENGTH_SHORT).show();
+            boolean insertData = myDB.insertData(name, email, phone, flag);
+            globalVariable.setHelpTeam(name);
+            globalVariable.setPoliceEmail(email);
+            globalVariable.setPoliceMobile(phone);
+            if (insertData == true) {
+                name_value.setText("");
+                email_value.setText("");
+                mobile_value.setText("");
+                Toast.makeText(PoliceInformation.this, "Data Insert successful.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(PoliceInformation.this, "Data Insert unsuccessful.", Toast.LENGTH_SHORT).show();
+            }
         }
+
     }
+
     private void getData() {
         // Cursor cursor = myDB.searchData("P");
         Cursor cursor = myDB.fetch();
         if (cursor.getCount() > 0) {
-            //    Toast.makeText(getApplicationContext(), cursor.getString(4), Toast.LENGTH_SHORT).show();
             if (cursor.getString(4).equals("PO")) {
-               /* globalVariable.setName(cursor.getString(1));
+                oldValue = cursor.getString(4);
+                globalVariable.setName(cursor.getString(1));
                 globalVariable.setEmail(cursor.getString(2));
-                globalVariable.setPhone(cursor.getString(3));*/
+                globalVariable.setPhone(cursor.getString(3));
                 //Toast.makeText(getApplicationContext(), cursor.getString(1), Toast.LENGTH_SHORT).show();
             }
 
         }
     }
+
+
 }

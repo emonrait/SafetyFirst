@@ -22,6 +22,7 @@ public class EmergencyInformation extends CustomKeyboardHide {
     private EditText email_value;
     private Button btnSubmit;
     DatabaseHelper myDB;
+    String oldValue = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class EmergencyInformation extends CustomKeyboardHide {
         mobile_value = findViewById(R.id.mobile_value);
         email_value = findViewById(R.id.email_value);
         btnSubmit = findViewById(R.id.btnSubmit);
-
+        getData();
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,14 +67,23 @@ public class EmergencyInformation extends CustomKeyboardHide {
         String phone = mobile_value.getText().toString().trim();
         String flag = "E";
         boolean insertData = myDB.insertData(name, email, phone, flag);
-        if (insertData == true) {
-            name_value.setText("");
-            email_value.setText("");
-            mobile_value.setText("");
-            Toast.makeText(EmergencyInformation.this, "Data Insert successful.", Toast.LENGTH_SHORT).show();
+        globalVariable.setEmName(name);
+        globalVariable.setEmEmail(email);
+        globalVariable.setEmMobile(phone);
+        if (oldValue.equals(flag)) {
+            Toast.makeText(EmergencyInformation.this, "Information already updated.", Toast.LENGTH_SHORT).show();
+
         } else {
-            Toast.makeText(EmergencyInformation.this, "Data Insert unsuccessful.", Toast.LENGTH_SHORT).show();
+            if (insertData == true) {
+                name_value.setText("");
+                email_value.setText("");
+                mobile_value.setText("");
+                Toast.makeText(EmergencyInformation.this, "Data Insert successful.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(EmergencyInformation.this, "Data Insert unsuccessful.", Toast.LENGTH_SHORT).show();
+            }
         }
+
     }
 
     private void getData() {
@@ -82,9 +92,10 @@ public class EmergencyInformation extends CustomKeyboardHide {
         if (cursor.getCount() > 0) {
             //    Toast.makeText(getApplicationContext(), cursor.getString(4), Toast.LENGTH_SHORT).show();
             if (cursor.getString(4).equals("E")) {
-               /* globalVariable.setName(cursor.getString(1));
+                oldValue = cursor.getString(4);
+                globalVariable.setName(cursor.getString(1));
                 globalVariable.setEmail(cursor.getString(2));
-                globalVariable.setPhone(cursor.getString(3));*/
+                globalVariable.setPhone(cursor.getString(3));
                 //Toast.makeText(getApplicationContext(), cursor.getString(1), Toast.LENGTH_SHORT).show();
             }
 
