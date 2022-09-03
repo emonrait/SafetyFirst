@@ -161,10 +161,10 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
                             DialogCustom.showErrorMessage(MainActivity.this, "Please Update Emergency Contact information", "E");
 
                         } else {
+                            sendSMS(globalVariable.getEmMobile(), globalVariable.getAddress());
                             DialogCustom.showCallDialog(MainActivity.this, globalVariable.getPoliceMobile());
                             //call();
                             sendEmail();
-                            sendSMS(globalVariable.getEmMobile(), globalVariable.getAddress());
                             btnClick.setVisibility(View.GONE);
                             btnSafe.setVisibility(View.VISIBLE);
                         }
@@ -333,11 +333,11 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
         } else {
             try {
                 String message = "Dear " + globalVariable.getEmName() + "," + "\n" + "\n" + "I am in a danger. please help. Come and rescue me asap. "
-                        + "\n" + "My Name is: " + globalVariable.getName() + ". "
-                        + "\n" + "My Phone no is: " + globalVariable.getPhone() + ". "
-                        + "\n" + "My Current Location map url is: " + globalVariable.getMapurl() + globalVariable.getLatitude() + "," + globalVariable.getLongitude();
+                        //  + "\n" + "My Name is: " + globalVariable.getName() + ". "
+                        //  + "\n" + "My Phone no is: " + globalVariable.getPhone() + ". "
+                        + "\n" + "My Current Location is: " + globalVariable.getMapurl() + DialogCustom.replacecommaDouble(globalVariable.getLatitude()) + "," + DialogCustom.replacecommaDouble(globalVariable.getLongitude());
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(phoneNo, null, message, null, null);
+                smsManager.sendTextMessage(phoneNo, globalVariable.getName(), message, null, null);
                 Toast.makeText(getApplicationContext(), "Message Sent",
                         Toast.LENGTH_LONG).show();
             } catch (Exception ex) {
@@ -425,10 +425,10 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
                             DialogCustom.showErrorMessage(MainActivity.this, "Please Update Emergency Contact information", "E");
 
                         } else {
+                            sendSMS(globalVariable.getEmMobile(), globalVariable.getAddress());
                             DialogCustom.showCallDialog(MainActivity.this, globalVariable.getPoliceMobile());
                             //call();
                             sendEmail();
-                            sendSMS(globalVariable.getEmMobile(), globalVariable.getAddress());
                             btnClick.setVisibility(View.GONE);
                             btnSafe.setVisibility(View.VISIBLE);
                         }

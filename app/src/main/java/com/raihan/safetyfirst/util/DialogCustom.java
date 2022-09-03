@@ -125,4 +125,19 @@ public class DialogCustom {
         //activity.finishAffinity();
 
     }
+
+    public static double replacecommaDouble(String str) {
+        double rValue = 0.00;
+        try {
+
+            String regx = "[-+^:*#_/, %@$@!*\u09F3]";
+            str = str.replaceAll(regx, "");
+            rValue = Double.parseDouble(str);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            rValue = 0.00;
+        }
+        return rValue;
+    }
 }
