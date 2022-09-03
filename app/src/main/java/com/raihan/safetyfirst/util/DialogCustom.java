@@ -35,6 +35,7 @@ public class DialogCustom {
         final AlertDialog alertDialog = dialog.create();
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         // tv_message.setText(activity.getString(R.string.alert_message));
+        tv_number.setVisibility(View.VISIBLE);
         tv_number.setText(phone);
         btn_no.setOnClickListener(new View.OnClickListener() {
             @Override
