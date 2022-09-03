@@ -328,20 +328,25 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
     }
 
     public void sendSMS(String phoneNo, String msg) {
-        try {
-            String message = "Dear " + globalVariable.getEmName() + "," + "\n" + "\n" + "I am in a danger. please help. Come and rescue me asap. "
-                    + "\n" + "My Name is: " + globalVariable.getName() + ". "
-                    + "\n" + "My Phone no is: " + globalVariable.getPhone() + ". "
-                    + "\n" + "My Current Location map url is: " + globalVariable.getMapurl() + globalVariable.getLatitude() + "," + globalVariable.getLongitude();
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNo, null, message, null, null);
-            Toast.makeText(getApplicationContext(), "Message Sent",
-                    Toast.LENGTH_LONG).show();
-        } catch (Exception ex) {
-            Toast.makeText(getApplicationContext(), ex.getMessage().toString(),
-                    Toast.LENGTH_LONG).show();
-            ex.printStackTrace();
+        if (phoneNo.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Phone no not found!", Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                String message = "Dear " + globalVariable.getEmName() + "," + "\n" + "\n" + "I am in a danger. please help. Come and rescue me asap. "
+                        + "\n" + "My Name is: " + globalVariable.getName() + ". "
+                        + "\n" + "My Phone no is: " + globalVariable.getPhone() + ". "
+                        + "\n" + "My Current Location map url is: " + globalVariable.getMapurl() + globalVariable.getLatitude() + "," + globalVariable.getLongitude();
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(phoneNo, null, message, null, null);
+                Toast.makeText(getApplicationContext(), "Message Sent",
+                        Toast.LENGTH_LONG).show();
+            } catch (Exception ex) {
+                Toast.makeText(getApplicationContext(), ex.getMessage().toString(),
+                        Toast.LENGTH_LONG).show();
+                ex.printStackTrace();
+            }
         }
+
     }
 
     private void call() {
