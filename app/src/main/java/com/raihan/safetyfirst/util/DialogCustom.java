@@ -29,11 +29,13 @@ public class DialogCustom {
         final Button btn_no = reg_layout.findViewById(R.id.btn_no);
         final Button btn_yes = reg_layout.findViewById(R.id.btn_yes);
         final TextView tv_message = reg_layout.findViewById(R.id.tv_message);
+        final TextView tv_number = reg_layout.findViewById(R.id.tv_number);
 
         dialog.setView(reg_layout);
         final AlertDialog alertDialog = dialog.create();
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        tv_message.setText(activity.getString(R.string.alert_message) + "-" + phone);
+        // tv_message.setText(activity.getString(R.string.alert_message));
+        tv_number.setText(phone);
         btn_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
