@@ -99,9 +99,9 @@ public class PoliceInformation extends CustomKeyboardHide {
         if (cursor.getCount() > 0) {
             if (cursor.getString(4).equals("PO")) {
                 oldValue = cursor.getString(4);
-                globalVariable.setName(cursor.getString(1));
-                globalVariable.setEmail(cursor.getString(2));
-                globalVariable.setPhone(cursor.getString(3));
+                globalVariable.setHelpTeam(cursor.getString(1));
+                globalVariable.setPoliceEmail(cursor.getString(2));
+                globalVariable.setPoliceMobile(cursor.getString(3));
                 //Toast.makeText(getApplicationContext(), cursor.getString(1), Toast.LENGTH_SHORT).show();
             }
 

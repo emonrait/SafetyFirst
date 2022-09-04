@@ -97,9 +97,9 @@ public class EmergencyInformation extends CustomKeyboardHide {
             //    Toast.makeText(getApplicationContext(), cursor.getString(4), Toast.LENGTH_SHORT).show();
             if (cursor.getString(4).equals("E")) {
                 oldValue = cursor.getString(4);
-                globalVariable.setName(cursor.getString(1));
-                globalVariable.setEmail(cursor.getString(2));
-                globalVariable.setPhone(cursor.getString(3));
+                globalVariable.setEmName(cursor.getString(1));
+                globalVariable.setEmEmail(cursor.getString(2));
+                globalVariable.setEmMobile(cursor.getString(3));
                 //Toast.makeText(getApplicationContext(), cursor.getString(1), Toast.LENGTH_SHORT).show();
             }
 

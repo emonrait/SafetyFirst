@@ -331,8 +331,8 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
             Toast.makeText(getApplicationContext(), "Phone no not found!", Toast.LENGTH_LONG).show();
         } else {
             try {
-                String message = "Dear " + globalVariable.getEmName() + "," + "\n" + "\n" + "I am in a danger. please help. Come and rescue me asap. "
-                        + "\n" + "My Name is: " + globalVariable.getName() + ". "
+                String message = "Dear " + globalVariable.getEmName() + "," + "\n" + "\n" + "I am in a danger. please help & rescue me asap. "
+                        //  + "\n" + "My Name is: " + globalVariable.getName() + ". "
                         //  + "\n" + "My Phone no is: " + globalVariable.getPhone() + ". "
                         + "\n" + "My Current Location is: " + globalVariable.getMapurl() + DialogCustom.commaSeparateValue(globalVariable.getLatitude()) + "," + DialogCustom.commaSeparateValue(globalVariable.getLongitude());
                 SmsManager smsManager = SmsManager.getDefault();
