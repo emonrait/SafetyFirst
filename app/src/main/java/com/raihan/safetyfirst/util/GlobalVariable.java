@@ -19,6 +19,7 @@ public class GlobalVariable extends Application {
     private String emEmail = "";
     private String mapurl = "https://maps.google.com?q=";
     private ArrayList<String> emailList;
+    private ArrayList<String> mobileList;
 
     public String getMapurl() {
         return mapurl;
@@ -130,5 +131,13 @@ public class GlobalVariable extends Application {
 
     public void setEmailList(ArrayList<String> emailList) {
         this.emailList = emailList;
+    }
+
+    public ArrayList<String> getMobileList() {
+        return mobileList;
+    }
+
+    public void setMobileList(ArrayList<String> mobileList) {
+        this.mobileList = mobileList;
     }
 }

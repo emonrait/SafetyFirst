@@ -52,6 +52,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+import javax.mail.Message;
+import javax.mail.internet.InternetAddress;
+
 import kotlin.jvm.internal.Intrinsics;
 
 public class MainActivity extends CustomKeyboardHide implements SensorEventListener {
@@ -72,6 +75,7 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
 
     String currentAddress = "";
     ArrayList<String> emailList = new ArrayList<>();
+    ArrayList<String> mobileList = new ArrayList<>();
 
 
     @Override
@@ -108,6 +112,7 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
         final TextView mobilet = nevhead.findViewById(R.id.mobile);
         getData();
         getEmailList();
+        getMobileList();
 
         // getCurrentAddress();
         navigationView.setItemIconTintList(null);
@@ -161,7 +166,9 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
                             DialogCustom.showErrorMessage(MainActivity.this, "Please Update Emergency Contact information", "E");
 
                         } else {
-                            sendSMS(globalVariable.getEmMobile(), globalVariable.getAddress());
+                            for (String mobile : globalVariable.getMobileList()) {
+                                sendSMS(mobile, globalVariable.getAddress());
+                            }
                             DialogCustom.showCallDialog(MainActivity.this, globalVariable.getPoliceMobile());
                             //call();
                             sendEmail();
@@ -424,7 +431,10 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
                             DialogCustom.showErrorMessage(MainActivity.this, "Please Update Emergency Contact information", "E");
 
                         } else {
-                            sendSMS(globalVariable.getEmMobile(), globalVariable.getAddress());
+                            for (String mobile : globalVariable.getMobileList()) {
+                                sendSMS(mobile, globalVariable.getAddress());
+                            }
+                            //sendSMS(globalVariable.getEmMobile(), globalVariable.getAddress());
                             DialogCustom.showCallDialog(MainActivity.this, globalVariable.getPoliceMobile());
                             //call();
                             sendEmail();
@@ -543,6 +553,26 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
             globalVariable.setEmailList(emailList);
         }
     }
+
+
+    private void getMobileList() {
+        Cursor cursor = myDB.fetch();
+        if (cursor.getCount() > 0) {
+            // Log.d("cursor-->", cursor.getString(0));
+            if (!Objects.equals(cursor.getString(4), "P") || !Objects.equals(cursor.getString(4), "PO")) {
+                mobileList.add(cursor.getString(3));
+            }
+            while (cursor.moveToNext()) {
+                if (!Objects.equals(cursor.getString(4), "P") || !Objects.equals(cursor.getString(4), "PO")) {
+                    mobileList.add(cursor.getString(3));
+                    Log.d("cursor-->", cursor.getString(2));
+                }
+
+            }
+            globalVariable.setMobileList(mobileList);
+        }
+    }
+
 
     @Override
     public void onBackPressed() {
