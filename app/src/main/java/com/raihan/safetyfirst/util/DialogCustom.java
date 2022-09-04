@@ -142,7 +142,7 @@ public class DialogCustom {
             ((DecimalFormat) f).setDecimalSeparatorAlwaysShown(true);
             ((DecimalFormat) f).setMaximumFractionDigits(2);
             ((DecimalFormat) f).setMinimumFractionDigits(2);
-            rValue = Double.parseDouble(f.format(rValue));
+            rValue = Double.parseDouble(f.format(str));
 
         } catch (Exception e) {
             e.printStackTrace();
