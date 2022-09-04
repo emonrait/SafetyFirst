@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -130,24 +131,33 @@ public class DialogCustom {
 
     }
 
-    public static double replacecommaDouble(String str) {
-        double rValue = 0.00;
-        try {
+    public static String commaSeparateValue(String str) {
+        String rValue = "";
 
-            String regx = "[-+^:*#_/, %@$@!*\u09F3]";
+        double amount = 0.00;
+
+        try {
+            //str = str.replaceAll(",", "");
+            String regx = "[-+^:*#_/, %@$@!*]";
             str = str.replaceAll(regx, "");
-            //rValue = Double.parseDouble(str);
+
+
+            amount = Double.parseDouble(str);
 
             Format f = DecimalFormat.getNumberInstance(new Locale("en", "IN"));
             ((DecimalFormat) f).setDecimalSeparatorAlwaysShown(true);
-            ((DecimalFormat) f).setMaximumFractionDigits(2);
             ((DecimalFormat) f).setMinimumFractionDigits(2);
-            rValue = Double.parseDouble(f.format(str));
+            ((DecimalFormat) f).setMaximumFractionDigits(2);
+
+            rValue = f.format(amount);
+            // Log.e("rValue-->", rValue);
 
         } catch (Exception e) {
+            rValue = "0.00";
             e.printStackTrace();
-            rValue = 0.00;
         }
+        Log.d("rValue-->", rValue);
         return rValue;
     }
+
 }

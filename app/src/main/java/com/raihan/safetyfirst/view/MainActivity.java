@@ -301,7 +301,6 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
             Log.e("Errorper", String.valueOf(var6.getMessage()));
         }
 
-
     }
 
     public static boolean isLocationEnabled(Context context) {
@@ -335,7 +334,7 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
                 String message = "Dear " + globalVariable.getEmName() + "," + "\n" + "\n" + "I am in a danger. please help. Come and rescue me asap. "
                         + "\n" + "My Name is: " + globalVariable.getName() + ". "
                         //  + "\n" + "My Phone no is: " + globalVariable.getPhone() + ". "
-                        + "\n" + "My Current Location is: " + globalVariable.getMapurl() + DialogCustom.replacecommaDouble(globalVariable.getLatitude()) + "," + DialogCustom.replacecommaDouble(globalVariable.getLongitude());
+                        + "\n" + "My Current Location is: " + globalVariable.getMapurl() + DialogCustom.commaSeparateValue(globalVariable.getLatitude()) + "," + DialogCustom.commaSeparateValue(globalVariable.getLongitude());
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(phoneNo, globalVariable.getName(), message, null, null);
                 Toast.makeText(getApplicationContext(), "Message Sent",
