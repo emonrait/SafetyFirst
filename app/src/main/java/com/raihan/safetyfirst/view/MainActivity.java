@@ -36,6 +36,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.raihan.safetyfirst.BuildConfig;
 import com.raihan.safetyfirst.R;
 import com.raihan.safetyfirst.database.DatabaseHelper;
@@ -135,6 +136,16 @@ public class MainActivity extends CustomKeyboardHide implements SensorEventListe
                 return false;
             }
         });
+
+
+        KProgressHUD.create(MainActivity.this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("Please wait")
+               // .setDetailsLabel("Downloading data")
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+                .show();
 
         btnSafe.setOnClickListener(new View.OnClickListener() {
             @Override
